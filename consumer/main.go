@@ -4,15 +4,16 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/Vishal1297/go-kafka-example/common"
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 )
 
 func main() {
 
 	c, err := kafka.NewConsumer(&kafka.ConfigMap{
-		"bootstrap.servers": "localhost",
-		"group.id":          "myGroup",
-		"auto.offset.reset": "earliest",
+		"bootstrap.servers": common.KafkaServers,
+		"group.id":          common.GroupId,
+		"auto.offset.reset": common.OffsetResetEarliest,
 	})
 
 	if err != nil {
@@ -20,7 +21,7 @@ func main() {
 	}
 
 	// c.SubscribeTopics([]string{"myTopic", "^aRegex.*[Tt]opic"}, nil)
-	c.SubscribeTopics([]string{"myTopic"}, nil)
+	c.SubscribeTopics([]string{common.TopicName}, nil)
 
 	// A signal handler or similar could be used to set this to false to break the loop.
 	run := true

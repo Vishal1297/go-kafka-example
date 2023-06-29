@@ -1,4 +1,4 @@
-module go-kafka-example
+module github.com/Vishal1297/go-kafka-example
 
 go 1.20
 

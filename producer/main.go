@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/Vishal1297/go-kafka-example/common"
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 )
 
 func main() {
 
 	p, err := kafka.NewProducer(&kafka.ConfigMap{
-		"bootstrap.servers": "localhost",
+		"bootstrap.servers": common.KafkaServers,
 		"acks":              "all",
 	})
 
@@ -35,7 +36,7 @@ func main() {
 	}()
 
 	// Produce messages to topic (asynchronously)
-	topic := "myTopic"
+	topic := common.TopicName
 	for index, word := range []string{"Welcome", "to", "the", "Confluent", "Kafka", "Golang", "client"} {
 		p.Produce(&kafka.Message{
 			TopicPartition: kafka.TopicPartition{Topic: &topic, Partition: kafka.PartitionAny},
